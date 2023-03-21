@@ -1,8 +1,16 @@
+__all__ = [
+    "get_distance_matrix",
+    "create_dendrogram",
+    "get_cluster_labels",
+    "get_cluster_labels_df",
+]
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.cluster import hierarchy
 from scipy.spatial.distance import squareform
+
 
 def _get_distance_matrix_for_user(df_user):
     n = len(df_user)
@@ -10,15 +18,16 @@ def _get_distance_matrix_for_user(df_user):
     X = np.zeros((n, n))
     for i in range(n):
         for j in range(n):
-            cat1 = df_user.query('card_id==' + str(i+1))['category_label'].values[0]
-            cat2 = df_user.query('card_id==' + str(j+1))['category_label'].values[0]
+            cat1 = df_user.query("card_id==" + str(i + 1))["category_label"].values[0]
+            cat2 = df_user.query("card_id==" + str(j + 1))["category_label"].values[0]
             if cat1 == cat2:
                 X[i, j] = 0
             else:
                 X[i, j] = 1
-            j+=i
-        i+=1
+            j += i
+        i += 1
     return X
+
 
 def get_distance_matrix(df):
     """
@@ -43,7 +52,7 @@ def get_distance_matrix(df):
     """
     id = 1
     while id <= max(df.user_id):
-        df_u = df.loc[df['user_id'] == id]
+        df_u = df.loc[df["user_id"] == id]
         print("Computing distance matrix for user " + str(id))
         distance_matrix_user = _get_distance_matrix_for_user(df_u)
         if id == 1:
@@ -54,7 +63,10 @@ def get_distance_matrix(df):
     condensed_distance_matrix = squareform(distance_matrix_all)
     return condensed_distance_matrix
 
-def create_dendrogram(df, distance_matrix=None, count='fraction', linkage='average', color_treshold=None):
+
+def create_dendrogram(
+    df, distance_matrix=None, count="fraction", linkage="average", color_treshold=None
+):
     """
     Plot hierarchical clustering of kardsort data as dendrogram.
 
@@ -101,19 +113,19 @@ def create_dendrogram(df, distance_matrix=None, count='fraction', linkage='avera
         Can be a fraction (0 - 1) or an absolute value (<= n = number of users).
         The default cut is at 75%.
     """
-    
+
     if distance_matrix is None:
         distance_matrix = get_distance_matrix(df)
 
-    count_types = ['absolute', 'fraction']
+    count_types = ["absolute", "fraction"]
     if count not in count_types:
         raise ValueError("Invalid count type. Expected one of: %s" % count_types)
-    
-    linkage_types = ['average', 'complete', 'single']
+
+    linkage_types = ["average", "complete", "single"]
     if linkage not in linkage_types:
         raise ValueError("Invalid linkage. Expected one of: %s" % linkage_types)
 
-    if count == 'fraction':
+    if count == "fraction":
         distance_matrix = distance_matrix / np.max(distance_matrix)
         if color_treshold == None:
             color_treshold = 0.75
@@ -123,39 +135,46 @@ def create_dendrogram(df, distance_matrix=None, count='fraction', linkage='avera
 
     Z = hierarchy.linkage(distance_matrix, linkage)
     plt.figure(layout="constrained")
-    labels = df.loc[df['user_id'] == 1]['card_label'].squeeze().to_list()
-    dn = hierarchy.dendrogram(Z, labels=labels, orientation='right', color_threshold=color_treshold)
-  
+    labels = df.loc[df["user_id"] == 1]["card_label"].squeeze().to_list()
+    dn = hierarchy.dendrogram(
+        Z, labels=labels, orientation="right", color_threshold=color_treshold
+    )
+
     x_max = np.max(distance_matrix)
     if x_max <= 1:
         plt.xticks(np.arange(0.0, 1.1, 0.1))
     else:
-        plt.xticks(np.arange(0, x_max+1, 1))
+        plt.xticks(np.arange(0, x_max + 1, 1))
     for leaf, leaf_color in zip(plt.gca().get_yticklabels(), dn["leaves_color_list"]):
         leaf.set_color(leaf_color)
     plt.show()
 
+
 def _get_cluster_label_for_user(df_u, cluster_cards):
-    cat_before = ''
+    cat_before = ""
     for index, card in enumerate(cluster_cards):
         try:
-            cat = df_u.query('card_label=="' + card + '"')['category_label'].values[0]
-            if cat_before != '':
+            cat = df_u.query('card_label=="' + card + '"')["category_label"].values[0]
+            if cat_before != "":
                 if cat == cat_before:
                     continue
                 else:
-                    return 
+                    return
             cat_before = cat
             index += 1
         except IndexError:
             print('"' + card + '" is not a valid card label. Removed from list.')
             cluster_cards.remove(card)
-            print('Continue with cards: %s' % cluster_cards)
+            print("Continue with cards: %s" % cluster_cards)
     return cat
 
+
 def _get_cards_for_label(cluster_label, df_u):
-    cards_list = df_u.query('category_label=="' + cluster_label + '"')['card_label'].tolist()
+    cards_list = df_u.query('category_label=="' + cluster_label + '"')[
+        "card_label"
+    ].tolist()
     return cards_list
+
 
 def get_cluster_labels(df, cluster_cards):
     """
@@ -180,23 +199,24 @@ def get_cluster_labels(df, cluster_cards):
     out : list of str
         Contains cluster-labels from all users who grouped the given cards together. 
     """
-    
+
     cluster_labels = []
     id = 1
     while id <= max(df.user_id):
-        df_u = df.loc[df['user_id'] == id]
+        df_u = df.loc[df["user_id"] == id]
         try:
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
-                print('User ' + str(id) + ' labeled card(s): ' + cluster_label)
+                print("User " + str(id) + " labeled card(s): " + cluster_label)
                 cluster_labels.append(cluster_label)
             else:
-                print('User ' + str(id) + ' did not cluster cards together.')
+                print("User " + str(id) + " did not cluster cards together.")
         except UnboundLocalError:
-            print('No cards left in list.')
+            print("No cards left in list.")
             break
         id += 1
     return cluster_labels
+
 
 def get_cluster_labels_df(df, cluster_cards):
     """
@@ -227,21 +247,35 @@ def get_cluster_labels_df(df, cluster_cards):
         Dataframe with one row for each user who clustered the given cards together, including category label and 
         the full list of cards in that category. 
     """
-    
-    cluster_df = pd.DataFrame(columns=['user_id', 'cluster_label', 'cards'])
+
+    cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
     id = 1
     while id <= max(df.user_id):
-        df_u = df.loc[df['user_id'] == id]
+        df_u = df.loc[df["user_id"] == id]
         try:
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
-                print('User ' + str(id) + ' labeled card(s): ' + cluster_label)
+                print("User " + str(id) + " labeled card(s): " + cluster_label)
                 cards = _get_cards_for_label(cluster_label, df_u)
-                cluster_df = pd.concat([cluster_df, pd.DataFrame.from_records([{'user_id': id, 'cluster_label': cluster_label, 'cards': cards}])], ignore_index = True)
+                cluster_df = pd.concat(
+                    [
+                        cluster_df,
+                        pd.DataFrame.from_records(
+                            [
+                                {
+                                    "user_id": id,
+                                    "cluster_label": cluster_label,
+                                    "cards": cards,
+                                }
+                            ]
+                        ),
+                    ],
+                    ignore_index=True,
+                )
             else:
-                print('User ' + str(id) + ' did not cluster cards together.')
+                print("User " + str(id) + " did not cluster cards together.")
         except UnboundLocalError:
-            print('No cards left in list.')
+            print("No cards left in list.")
             break
         id += 1
     return cluster_df
