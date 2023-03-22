@@ -18,7 +18,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`cardsort` was created by Katharina Kloppenborg. It is licensed under the terms of the GNU General Public License v3.0 license.
+`cardsort` was created by Katharina Kloppenborg and is licensed under the terms of the MIT license.
 
 ## Credits
 

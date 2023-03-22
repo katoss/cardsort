@@ -3,7 +3,7 @@ name = "cardsort"
 version = "0.1.0"
 description = "Analyse cardsorting data"
 authors = ["Katharina Kloppenborg"]
-license = "GNU General Public License v3.0"
+license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
