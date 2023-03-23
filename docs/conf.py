@@ -21,7 +21,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
 ]
-autoapi_dirs = ["../src"]
+autoapi_dirs = ["../src"] # location to parse for API reference
+html_theme = "sphinx_rtd_theme"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
