@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "cardsort"
-version = "0.1.0"
+version = "0.1.1"
 description = "Analyse cardsorting data"
 authors = ["Katharina Kloppenborg"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
+python = ">=3.8,<3.12"
 pandas = "^1.5.3"
 numpy = "^1.24.2"
 matplotlib = "^3.7.1"
