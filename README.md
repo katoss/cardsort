@@ -45,7 +45,7 @@ analysis.create_dendrogram(df)
 
 __Output__
 
-![Dendrogram plot generated from example data](/docs/dendrogram.png)
+![Dendrogram plot generated from example data](https://github.com/katoss/cardsort/blob/main/docs/dendrogram.png?raw=true)
 
 ```python
 # learn which category labels users gave to clusters
