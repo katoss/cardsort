@@ -2,17 +2,32 @@
 
 A package that helps UX researchers quickly analyse data from cardsorting exercises.
 
-__Accepted data__
-* This package works with data exports from [kardsort.com](https://kardsort.com/) (Export format 'Casolysis Data (.csv) - Recommended')
-* This data equals the following structure: ```card_id, card_label, category_id, category_label, user_id```
+__More precisely, it helps you to:__
+* Create dendrograms
+* Extract user-generated category-labels
+* Using data exports from [kardsort.com](https://kardsort.com/)
 
-## Installation
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Quick start](#quick-start)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credits](#credits)
+
+## Documentation
+[cardsort.readthedocs.io](https://cardsort.readthedocs.io)
+
+## Quick start
+### Installation
 
 ```bash
 $ pip install cardsort
 ```
 
-## Usage
+### Usage
 
 `cardsort` can be used to create dendrograms and extract user-generated category-labels:
 
@@ -30,6 +45,12 @@ analysis.create_dendrogram(df)
 cards = ['Banana', 'Apple']
 analysis.get_cluster_labels(df, cards)
 ```
+
+__Accepted data__
+* This package works with data exports from [kardsort.com](https://kardsort.com/) (Export format 'Casolysis Data (.csv) - Recommended')
+* This data equals the following structure: ```card_id, card_label, category_id, category_label, user_id```
+
+See the [documentation](https://cardsort.readthedocs.io) for details.
 
 ## Contributing
 
