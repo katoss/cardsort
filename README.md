@@ -13,6 +13,7 @@ __More precisely, it helps you to:__
 - [Quick start](#quick-start)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Accepted data](#accepted-data)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
@@ -40,13 +41,23 @@ df = pd.read_csv(path)
 
 # create a dendrogram that summarized user-generated clusters
 analysis.create_dendrogram(df)
+```
 
+__Output__
+
+![Dendrogram plot generated from example data](/docs/dendrogram.png)
+
+```python
 # learn which category labels users gave to clusters
 cards = ['Banana', 'Apple']
 analysis.get_cluster_labels(df, cards)
 ```
+__Output__
 
-__Accepted data__
+['Healthy snacks', 'Snacks', 'Fruits', 'Food']
+
+
+### Accepted data
 * This package works with data exports from [kardsort.com](https://kardsort.com/) (Export format 'Casolysis Data (.csv) - Recommended')
 * This data equals the following structure: ```card_id, card_label, category_id, category_label, user_id```
 
