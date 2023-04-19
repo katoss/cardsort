@@ -34,3 +34,7 @@ def test_get_cluster_labels_df():
 def test_create_dendrogram_ve_count():
     with pytest.raises(ValueError):
         analysis.create_dendrogram(df, count="I am no count type!") 
+
+def test_create_dendrogram_ve_linkage():
+    with pytest.raises(ValueError):
+        analysis.create_dendrogram(df, linkage="I am no linkage type!") 
