@@ -18,9 +18,11 @@ def test_get_cluster_labels():
     actual = analysis.get_cluster_labels(df, input)
     assert actual == expected, "Test data cluster labels incorrectly retreived"
 
-def test_get_cluster_labels_error():
-    """Check IndexError raised when card label is not valid"""
-    with pytest.raises(IndexError):
-        input = ['Tuger']
-        df = pd.read_csv('tests/test-data.csv')
-        analysis.get_cluster_labels(df,input)
+def test_get_cluster_labels_df():
+    input = ['Cat', 'Tiger', 'Dog']
+    df = pd.read_csv('tests/test-data.csv')
+    data_exp = [[1, "pets", ["Dog", "Tiger", "Cat"]],[2, "animals", ["Cat", "Tiger", "Dog"]],[5, "Animals", ["Dog", "Tiger", "Cat"]]] 
+    expected = pd.DataFrame(data_exp, columns=["user_id", "cluster_label", "cards"])
+    expected = expected.astype({'user_id' : 'object'})
+    actual = analysis.get_cluster_labels_df(df,input)
+    assert actual.equals(expected), "Dataframe does not equal expected dataframe"
