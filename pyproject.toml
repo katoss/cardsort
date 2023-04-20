@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "cardsort"
 version = "0.1.2"
-description = "Analyse cardsorting data"
+description = "Analyse data from open card sorting"
 authors = ["Katharina Kloppenborg"]
 license = "MIT"
 readme = "README.md"
