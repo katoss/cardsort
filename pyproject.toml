@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cardsort"
-version = "0.2.6"
+version = "0.0.0"
 description = "Analyse data from open card sorting"
 authors = ["Katharina Kloppenborg"]
 license = "MIT"
