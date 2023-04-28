@@ -31,7 +31,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = [
-    "./cardsort/src/cardsort/__init__.py:__version__"
+    "./src/cardsort/__init__.py:__version__"
  ]                                          # version location
 version_source = "commit"                   # getting release version from GitHub tag
 branch = "main"                             # branch to make releases of
@@ -42,3 +42,4 @@ upload_to_release = true                    # auto-create GitHub release
 upload_to_pypi = false                      # don't auto-upload to PyPI
 remove_dist = false                         # don't remove dists
 patch_without_tag = true                    # patch release by default
+
