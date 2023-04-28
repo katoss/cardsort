@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cardsort"
-version = "0.0.0"
+version = "0.2.6"
 description = "Analyse data from open card sorting"
 authors = ["Katharina Kloppenborg"]
 license = "MIT"
@@ -30,9 +30,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
-version_variable = [
-    "./src/cardsort/__init__.py:__version__"
- ]                                          # version location
+version_variable = "tool.poetry.version"                                          # version location
 version_source = "commit"                   # getting release version from GitHub tag
 branch = "main"                             # branch to make releases of
 changelog_file = "CHANGELOG.md"             # changelog file
