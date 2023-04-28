@@ -30,7 +30,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
-version_variable = "pyproject.toml:tool.poetry.version"  # version location
+version_variable = "pyproject.toml:poetry.version"  # version location
 version_source = "commit"                   # getting release version from GitHub tag
 branch = "main"                             # branch to make releases of
 changelog_file = "CHANGELOG.md"             # changelog file
