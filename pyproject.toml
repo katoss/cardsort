@@ -31,7 +31,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = [
-    "cardsort/src/cardsort/__init__.py:__version__"
+    "./cardsort/src/cardsort/__init__.py:__version__"
  ]                                          # version location
 version_source = "commit"                   # getting release version from GitHub tag
 branch = "main"                             # branch to make releases of
