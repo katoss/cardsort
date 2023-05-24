@@ -123,11 +123,9 @@ def create_dendrogram(
 
     if count == "fraction":
         distance_matrix = distance_matrix / np.max(distance_matrix)
-        if color_treshold == None:
-            color_treshold = 0.75
+        color_treshold = 0.75 if color_treshold is None else color_treshold
     else:
-        if color_treshold == None:
-            color_treshold = np.max(distance_matrix) * 0.75
+        color_treshold = np.max(distance_matrix) * 0.75 if color_treshold is None else color_treshold
 
     Z = hierarchy.linkage(distance_matrix, linkage)
     plt.figure(layout="constrained")
@@ -137,10 +135,8 @@ def create_dendrogram(
     )
 
     x_max = np.max(distance_matrix)
-    if x_max <= 1:
-        plt.xticks(np.arange(0.0, 1.1, 0.1))
-    else:
-        plt.xticks(np.arange(0, x_max + 1, 1))
+    plt.xticks(np.arange(0.0, 1.1, 0.1) if x_max <= 1 else np.arange(0, x_max + 1, 1))
+    
     for leaf, leaf_color in zip(plt.gca().get_yticklabels(), dn["leaves_color_list"]):
         leaf.set_color(leaf_color)
     plt.show()
