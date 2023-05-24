@@ -189,20 +189,20 @@ def get_cluster_labels(df, cluster_cards):
     """
 
     cluster_labels = []
-    id = 1
-    while id <= max(df.user_id):
+    user_ids = df["user_id"].unique()
+
+    for id in user_ids:
         df_u = df.loc[df["user_id"] == id]
-        try:
+        if len(cluster_cards) > 0:
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
                 print("User " + str(id) + " labeled card(s): " + cluster_label)
                 cluster_labels.append(cluster_label)
             else:
                 print("User " + str(id) + " did not cluster cards together.")
-        except UnboundLocalError:
+        else:
             print("No cards left in list.")
             break
-        id += 1
     return cluster_labels
 
 
