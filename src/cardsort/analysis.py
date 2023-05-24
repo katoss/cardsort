@@ -45,8 +45,9 @@ def get_distance_matrix(df):
         A condensed distance matrix (a flat array containing the upper triangle of a distance matrix) 
         representing the pairwise similarity of all cards.
     """
-    id = 1
-    while id <= max(df.user_id):
+    user_ids = df["user_id"].unique()
+
+    for id in user_ids:
         df_u = df.loc[df["user_id"] == id]
         print("Computing distance matrix for user " + str(id))
         distance_matrix_user = _get_distance_matrix_for_user(df_u)
