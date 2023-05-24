@@ -161,9 +161,7 @@ def _get_cluster_label_for_user(df_u, cluster_cards):
 
 
 def _get_cards_for_label(cluster_label, df_u):
-    cards_list = df_u.query('category_label=="' + cluster_label + '"')[
-        "card_label"
-    ].tolist()
+    cards_list = df_u.loc[df_u['category_label'] == cluster_label, 'card_label'].tolist()
     return cards_list
 
 
