@@ -55,7 +55,6 @@ def get_distance_matrix(df):
             distance_matrix_all = distance_matrix_user
         else:
             distance_matrix_all = np.add(distance_matrix_all, distance_matrix_user)
-        id += 1
     condensed_distance_matrix = squareform(distance_matrix_all)
     return condensed_distance_matrix
 
