@@ -136,7 +136,7 @@ def create_dendrogram(
 
     x_max = np.max(distance_matrix)
     plt.xticks(np.arange(0.0, 1.1, 0.1) if x_max <= 1 else np.arange(0, x_max + 1, 1))
-    
+
     for leaf, leaf_color in zip(plt.gca().get_yticklabels(), dn["leaves_color_list"]):
         leaf.set_color(leaf_color)
     plt.show()
@@ -144,18 +144,17 @@ def create_dendrogram(
 
 def _get_cluster_label_for_user(df_u, cluster_cards):
     cat_before = ""
-    for index, card in enumerate(cluster_cards):
-        try:
-            cat = df_u.query('card_label=="' + card + '"')["category_label"].values[0]
+    for card in cluster_cards:
+        if card in df_u["card_label"].values:
+            cat = df_u.loc[df_u['card_label'] == card, 'category_label'].values[0]
             if cat_before != "":
                 if cat == cat_before:
                     continue
                 else:
                     return
             cat_before = cat
-            index += 1
-        except IndexError:
-            print('"' + card + '" is not a valid card label. Removed from list.')
+        else:
+            print(f'"{card}" is not a valid card label. Removed from list.')
             cluster_cards.remove(card)
             print("Continue with cards: %s" % cluster_cards)
     return cat
