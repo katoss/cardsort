@@ -1,3 +1,9 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.cluster import hierarchy
+from scipy.spatial.distance import squareform
+
 __all__ = [
     "get_distance_matrix",
     "create_dendrogram",
@@ -5,21 +11,18 @@ __all__ = [
     "get_cluster_labels_df",
 ]
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy.cluster import hierarchy
-from scipy.spatial.distance import squareform
-
-
 def _get_distance_matrix_for_user(df_user):
     n = len(df_user)
 
     X = np.zeros((n, n))
     for i in range(n):
         for j in range(n):
-            cat1 = df_user.loc[df_user["card_id"] == (i + 1), "category_label"].values[0]
-            cat2 = df_user.loc[df_user["card_id"] == (j + 1), "category_label"].values[0]
+            cat1 = df_user.loc[df_user["card_id"] == (i + 1), "category_label"].values[
+                0
+            ]
+            cat2 = df_user.loc[df_user["card_id"] == (j + 1), "category_label"].values[
+                0
+            ]
             X[i, j] = X[j, i] = 0 if cat1 == cat2 else 1
     return X
 
@@ -42,7 +45,7 @@ def get_distance_matrix(df):
     Returns
     -------
     out : ndarray
-        A condensed distance matrix (a flat array containing the upper triangle of a distance matrix) 
+        A condensed distance matrix (a flat array containing the upper triangle of a distance matrix)
         representing the pairwise similarity of all cards.
     """
     user_ids = df["user_id"].unique()
@@ -76,11 +79,11 @@ def create_dendrogram(
             Name: user_id, dtype: int64
         These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
         The dataframe is used to extract leaf labels, and, if no distance_matrix provided, to calculate the distance matrix.
-    
+
     distance_matrix : ndarray, optional
-        Takes a condensed distance matrix as input: A flat array containing the upper triangular of the distance matrix. 
+        Takes a condensed distance matrix as input: A flat array containing the upper triangular of the distance matrix.
         A pre-calculated condensed distance matrix can be provided to save time generating the dendrogram.
-        If not specified, a new distance matrix will be calculated from df. 
+        If not specified, a new distance matrix will be calculated from df.
 
     count : str, optional
         How similarity is displayed.
@@ -90,7 +93,7 @@ def create_dendrogram(
 
         'absolute'
         Similarity is displayed as absolute counts from 0 to n = number of users.
-    
+
     linkage : str, optional
         Linkage method used to compute the distance between two clusters.
 
@@ -124,7 +127,9 @@ def create_dendrogram(
         distance_matrix = distance_matrix / np.max(distance_matrix)
         color_treshold = 0.75 if color_treshold is None else color_treshold
     else:
-        color_treshold = np.max(distance_matrix) * 0.75 if color_treshold is None else color_treshold
+        color_treshold = (
+            np.max(distance_matrix) * 0.75 if color_treshold is None else color_treshold
+        )
 
     Z = hierarchy.linkage(distance_matrix, linkage)
     plt.figure(layout="constrained")
@@ -145,7 +150,7 @@ def _get_cluster_label_for_user(df_u, cluster_cards):
     cat_before = ""
     for card in cluster_cards:
         if card in df_u["card_label"].values:
-            cat = df_u.loc[df_u['card_label'] == card, 'category_label'].values[0]
+            cat = df_u.loc[df_u["card_label"] == card, "category_label"].values[0]
             if cat_before != "":
                 if cat == cat_before:
                     continue
@@ -160,7 +165,9 @@ def _get_cluster_label_for_user(df_u, cluster_cards):
 
 
 def _get_cards_for_label(cluster_label, df_u):
-    cards_list = df_u.loc[df_u['category_label'] == cluster_label, 'card_label'].tolist()
+    cards_list = df_u.loc[
+        df_u["category_label"] == cluster_label, "card_label"
+    ].tolist()
     return cards_list
 
 
@@ -178,14 +185,14 @@ def get_cluster_labels(df, cluster_cards):
                 Name: category_label, dtype: object
                 Name: user_id, dtype: int64
         These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
-    
+
     cluster_cards : list of str
         List of card-labels for which you would like to get user-generated cluster-labels.
 
     Returns
     -------
     out : list of str
-        Contains cluster-labels from all users who grouped the given cards together. 
+        Contains cluster-labels from all users who grouped the given cards together.
     """
 
     cluster_labels = []
@@ -221,7 +228,7 @@ def get_cluster_labels_df(df, cluster_cards):
                 Name: category_label, dtype: object
                 Name: user_id, dtype: int64
         These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
-    
+
     cluster_cards : list of str
         List of card-labels for which you would like to get user-generated cluster-labels.
 
@@ -232,8 +239,8 @@ def get_cluster_labels_df(df, cluster_cards):
             Name: user_id, int
             Name: cluster_label, str
             Name: cards, list of str
-        Dataframe with one row for each user who clustered the given cards together, including category label and 
-        the full list of cards in that category. 
+        Dataframe with one row for each user who clustered the given cards together, including category label and
+        the full list of cards in that category.
     """
 
     cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
