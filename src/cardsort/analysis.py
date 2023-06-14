@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.cluster import hierarchy
 from scipy.spatial.distance import squareform
+from typing import List, Union
 
 __all__ = [
     "get_distance_matrix",
@@ -12,7 +13,7 @@ __all__ = [
 ]
 
 
-def _get_distance_matrix_for_user(df_user):
+def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
     n = len(df_user)
 
     X = np.zeros((n, n))
@@ -28,7 +29,7 @@ def _get_distance_matrix_for_user(df_user):
     return X
 
 
-def get_distance_matrix(df):
+def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
     """
     Return condensed distance matrix from kardsort data.
 
@@ -65,7 +66,7 @@ def get_distance_matrix(df):
 
 def create_dendrogram(
     df, distance_matrix=None, count="fraction", linkage="average", color_treshold=None
-):
+) -> None:
     """
     Plot hierarchical clustering of kardsort data as dendrogram.
 
@@ -147,7 +148,9 @@ def create_dendrogram(
     plt.show()
 
 
-def _get_cluster_label_for_user(df_u, cluster_cards):
+def _get_cluster_label_for_user(
+    df_u: pd.DataFrame, cluster_cards: List[str]
+) -> Union[str, None]:
     cat_before = ""
     for card in cluster_cards:
         if card in df_u["card_label"].values:
@@ -165,14 +168,14 @@ def _get_cluster_label_for_user(df_u, cluster_cards):
     return cat
 
 
-def _get_cards_for_label(cluster_label, df_u):
+def _get_cards_for_label(cluster_label: str, df_u: pd.DataFrame) -> List[str]:
     cards_list = df_u.loc[
         df_u["category_label"] == cluster_label, "card_label"
     ].tolist()
     return cards_list
 
 
-def get_cluster_labels(df, cluster_cards):
+def get_cluster_labels(df: pd.DataFrame, cluster_cards: List[str]) -> List[str]:
     """
     Return labels users created for clusters including a given list of cards.
 
@@ -214,7 +217,7 @@ def get_cluster_labels(df, cluster_cards):
     return cluster_labels
 
 
-def get_cluster_labels_df(df, cluster_cards):
+def get_cluster_labels_df(df: pd.DataFrame, cluster_cards: List[str]) -> pd.DataFrame:
     """
     Return category labels and user id for each user who clustered given list of cards together.
     Also returns full list of cards in that category.
