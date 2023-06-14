@@ -11,6 +11,7 @@ __all__ = [
     "get_cluster_labels_df",
 ]
 
+
 def _get_distance_matrix_for_user(df_user):
     n = len(df_user)
 
