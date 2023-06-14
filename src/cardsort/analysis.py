@@ -204,7 +204,7 @@ def get_cluster_labels(df, cluster_cards):
         if len(cluster_cards) > 0:
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
-                print("User " + str(id) + " labeled card(s): " + cluster_label)
+                print(f"User {id} labeled card(s): {cluster_label}")
                 cluster_labels.append(cluster_label)
             else:
                 print(f"User {id} did not cluster cards together.")
