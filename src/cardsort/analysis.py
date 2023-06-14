@@ -53,7 +53,7 @@ def get_distance_matrix(df):
 
     for id in user_ids:
         df_u = df.loc[df["user_id"] == id]
-        print("Computing distance matrix for user " + str(id))
+        print(f"Computing distance matrix for user {id}")
         distance_matrix_user = _get_distance_matrix_for_user(df_u)
         if id == 1:
             distance_matrix_all = distance_matrix_user
@@ -207,7 +207,7 @@ def get_cluster_labels(df, cluster_cards):
                 print("User " + str(id) + " labeled card(s): " + cluster_label)
                 cluster_labels.append(cluster_label)
             else:
-                print("User " + str(id) + " did not cluster cards together.")
+                print(f"User {id} did not cluster cards together.")
         else:
             print("No cards left in list.")
             break
@@ -252,7 +252,7 @@ def get_cluster_labels_df(df, cluster_cards):
         if len(cluster_cards) > 0:
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
-                print("User " + str(id) + " labeled card(s): " + cluster_label)
+                print(f"User {id} labeled card(s): {cluster_label}")
                 cards = _get_cards_for_label(cluster_label, df_u)
                 cluster_df = pd.concat(
                     [
@@ -270,7 +270,7 @@ def get_cluster_labels_df(df, cluster_cards):
                     ignore_index=True,
                 )
             else:
-                print("User " + str(id) + " did not cluster cards together.")
+                print(f"User {id} did not cluster cards together.")
         else:
             print("No cards left in list.")
             break
