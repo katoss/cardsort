@@ -18,7 +18,7 @@ def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
 
     X = np.zeros((n, n))
     for i in range(n):
-        for j in range(n):
+        for j in range(i, n):
             cat1 = df_user.loc[df_user["card_id"] == (i + 1), "category_label"].values[
                 0
             ]
