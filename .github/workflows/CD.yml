@@ -32,6 +32,9 @@ jobs:
     - name: Install package
       run: poetry install
 
+    - name: Build documentation
+      run: poetry run make html --directory docs/
+
     - name: Use Python Semantic Release to prepare release
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
