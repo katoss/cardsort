@@ -8,8 +8,9 @@
 
 Cardsort helps UX researchers quickly analyse data from card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
 
-__More precisely, it helps you to:__
-* Create dendrograms
+__More precisely, cardsort helps you to:__
+* Create distance matrices using hierarchical cluster analysis
+* Create dendrograms from based on these matrices
 * Extract user-generated category-labels
 * Using data exports from [kardsort.com](https://kardsort.com/)
 
