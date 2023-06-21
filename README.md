@@ -48,7 +48,7 @@ path = "example-data.csv" # data with columns: card_id, card_label, category_id,
 df = pd.read_csv(path) 
 ```
 
-The data used in this example can be found under [/docs/example-data.csv](https://github.com/katoss/cardsort/blob/main/docs/example-data.csv)
+The data used in this example can be found under [/docs/example-data.csv](https://github.com/katoss/cardsort/blob/main/docs/example-data.csv).
 
 __Create a dendrogram that summarizes user-generated clusters__
 ```python
