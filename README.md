@@ -72,7 +72,7 @@ Interested in contributing? Check out the [contributing guidelines](https://card
 
 ## License
 
-`cardsort` was created by Katharina Kloppenborg and is licensed under the terms of the MIT license.
+`cardsort` is licensed under the of the [MIT license](https://github.com/katoss/cardsort/blob/documentation/LICENSE).
 
 ## Credits
 
