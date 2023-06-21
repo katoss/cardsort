@@ -1,6 +1,6 @@
 # Cardsort analysis
 
-A package that helps UX researchers quickly analyse data from cardsorting exercises.
+A package that helps UX researchers quickly analyse data from card sorting exercises. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) for an introduction to the card sorting method.
 
 __More precisely, it helps you to:__
 * Create dendrograms
