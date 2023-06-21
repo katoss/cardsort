@@ -6,9 +6,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"cardsort"
-copyright = u"2023, Katharina Kloppenborg"
-author = u"Katharina Kloppenborg"
+project = "cardsort"
+copyright = "2023, Katharina Kloppenborg"
+author = "Katharina Kloppenborg"
 
 # -- General configuration ---------------------------------------------------
 
@@ -21,7 +21,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
 ]
-autoapi_dirs = ["../src"] # location to parse for API reference
+autoapi_dirs = ["../src"]  # location to parse for API reference
 html_theme = "sphinx_rtd_theme"
 
 # List of patterns, relative to source directory, that match files and
