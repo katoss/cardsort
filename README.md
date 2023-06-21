@@ -6,7 +6,7 @@
 
 # A Python package to cluster and visualize data from open card sorting tasks
 
-Cardsort helps UX researchers quickly analyse data from card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
+Cardsort helps UX researchers quickly analyse data from open card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
 
 __More precisely, cardsort helps you to:__
 * Create distance matrices using hierarchical cluster analysis
