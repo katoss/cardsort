@@ -10,7 +10,7 @@
 ![PyPI](https://img.shields.io/pypi/v/cardsort)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/katoss/cardsort/CI.yml)
 ![Read the Docs](https://img.shields.io/readthedocs/cardsort)
-[![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
+![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
 ![Codecov](https://img.shields.io/codecov/c/github/katoss/cardsort)
 
 
