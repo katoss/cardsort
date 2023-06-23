@@ -7,6 +7,12 @@
 ## A Python package to cluster and visualize data from open card sorting tasks
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+![PyPI](https://img.shields.io/pypi/v/cardsort)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/katoss/cardsort/CI.yml)
+![Read the Docs](https://img.shields.io/readthedocs/cardsort)
+[![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
+![Codecov](https://img.shields.io/codecov/c/github/katoss/cardsort)
+
 
 Cardsort helps UX researchers quickly analyse data from open card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
 
