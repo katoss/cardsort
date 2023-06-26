@@ -65,7 +65,7 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
 
 
 def create_dendrogram(
-    df, distance_matrix=None, count="fraction", linkage="average", color_treshold=None
+    df, distance_matrix=None, count="fraction", linkage="average", color_threshold=None
 ) -> None:
     """
     Plot hierarchical clustering of kardsort data as dendrogram.
@@ -108,7 +108,7 @@ def create_dendrogram(
         'single'
         Distance between the elements that are the closest each other in the two clusters.
 
-    color_treshold : double, optional
+    color_threshold : double, optional
         Level below which to cut the color threshold in the dendrogram branches.
         Can be a fraction (0 - 1) or an absolute value (<= n = number of users).
         The default cut is at 75%.
@@ -127,17 +127,19 @@ def create_dendrogram(
 
     if count == "fraction":
         distance_matrix = distance_matrix / np.max(distance_matrix)
-        color_treshold = 0.75 if color_treshold is None else color_treshold
+        color_threshold = 0.75 if color_threshold is None else color_threshold
     else:
-        color_treshold = (
-            np.max(distance_matrix) * 0.75 if color_treshold is None else color_treshold
+        color_threshold = (
+            np.max(distance_matrix) * 0.75
+            if color_threshold is None
+            else color_threshold
         )
 
     Z = hierarchy.linkage(distance_matrix, linkage)
     plt.figure(layout="constrained")
     labels = df.loc[df["user_id"] == 1]["card_label"].squeeze().to_list()
     dn = hierarchy.dendrogram(
-        Z, labels=labels, orientation="right", color_threshold=color_treshold
+        Z, labels=labels, orientation="right", color_threshold=color_threshold
     )
 
     x_max = np.max(distance_matrix)
