@@ -1,9 +1,24 @@
-# Cardsort analysis
+<br>
+<div align="center">
+<img src="https://github.com/katoss/cardsort/blob/documentation/logo.png" width="400">
+</div>
+<hr>
 
-A package that helps UX researchers quickly analyse data from cardsorting exercises.
+## A Python package to cluster and visualize data from open card sorting tasks
 
-__More precisely, it helps you to:__
-* Create dendrograms
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+![PyPI](https://img.shields.io/pypi/v/cardsort)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/katoss/cardsort/CI.yml)
+![Read the Docs](https://img.shields.io/readthedocs/cardsort)
+![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
+![Codecov](https://img.shields.io/codecov/c/github/katoss/cardsort)
+
+
+Cardsort helps UX researchers quickly analyse data from open card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
+
+__More precisely, cardsort helps you to:__
+* Create distance matrices using hierarchical cluster analysis
+* Create dendrograms from based on these matrices
 * Extract user-generated category-labels
 * Using data exports from [kardsort.com](https://kardsort.com/)
 
@@ -40,6 +55,9 @@ import pandas as pd
 path = "example-data.csv" # data with columns: card_id, card_label, category_id, category_label, user_id
 df = pd.read_csv(path) 
 ```
+
+The data used in this example can be found under [/docs/example-data.csv](https://github.com/katoss/cardsort/blob/main/docs/example-data.csv).
+
 __Create a dendrogram that summarizes user-generated clusters__
 ```python
 analysis.create_dendrogram(df)
@@ -68,11 +86,11 @@ See [documentation](https://cardsort.readthedocs.io)
 
 ## Contributing
 
-Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+Interested in contributing? Check out the [contributing guidelines](https://cardsort.readthedocs.io/en/latest/contributing.html). Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
 
 ## License
 
-`cardsort` was created by Katharina Kloppenborg and is licensed under the terms of the MIT license.
+`cardsort` is licensed under the of the [MIT license](https://github.com/katoss/cardsort/blob/documentation/LICENSE).
 
 ## Credits
 
