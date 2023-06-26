@@ -1,6 +1,6 @@
 <br>
 <div align="center">
-<img src="https://github.com/katoss/cardsort/blob/documentation/logo.png" width="400">
+<img src="https://github.com/katoss/cardsort/blob/main/logo.png" width="400">
 </div>
 <hr>
 
