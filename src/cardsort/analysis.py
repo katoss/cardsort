@@ -137,7 +137,12 @@ def create_dendrogram(
 
     Z = hierarchy.linkage(distance_matrix, linkage)
     plt.figure(layout="constrained")
-    labels = df.loc[df["user_id"] == 1]["card_label"].squeeze().to_list()
+    labels = (
+        df.loc[df["user_id"] == 1]
+        .sort_values("card_id")["card_label"]
+        .squeeze()
+        .to_list()
+    )
     dn = hierarchy.dendrogram(
         Z, labels=labels, orientation="right", color_threshold=color_threshold
     )
