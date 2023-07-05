@@ -56,16 +56,20 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
     """
     user_ids = df["user_id"].unique()
 
-    for id in user_ids:
-        df_u = df.loc[df["user_id"] == id]
-        logging.info(f"Computing distance matrix for user {id}")
-        distance_matrix_user = _get_distance_matrix_for_user(df_u)
-        if id == 1:
-            distance_matrix_all = distance_matrix_user
-        else:
-            distance_matrix_all = np.add(distance_matrix_all, distance_matrix_user)
-    condensed_distance_matrix = squareform(distance_matrix_all)
-    return condensed_distance_matrix
+    if user_ids[0] == 1:
+        for id in user_ids:
+            df_u = df.loc[df["user_id"] == id]
+            logging.info(f"Computing distance matrix for user {id}")
+            distance_matrix_user = _get_distance_matrix_for_user(df_u)
+            if id == 1:
+                distance_matrix_all = distance_matrix_user
+            else:
+                distance_matrix_all = np.add(distance_matrix_all, distance_matrix_user)
+        condensed_distance_matrix = squareform(distance_matrix_all)
+        return condensed_distance_matrix
+    else:
+        logging.ERROR("The first user ID needs to equal 1")
+        return None
 
 
 def create_dendrogram(
