@@ -14,7 +14,7 @@ __all__ = [
 ]
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
@@ -173,9 +173,9 @@ def _get_cluster_label_for_user(
                     return
             cat_before = cat
         else:
-            logging.debug(f'"{card}" is not a valid card label. Removed from list.')
+            logging.info(f'"{card}" is not a valid card label. Removed from list.')
             cluster_cards.remove(card)
-            logging.debug("Continue with cards: %s" % cluster_cards)
+            logging.info("Continue with cards: %s" % cluster_cards)
     return cat
 
 
