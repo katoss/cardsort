@@ -14,7 +14,7 @@ __all__ = [
 ]
 
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
