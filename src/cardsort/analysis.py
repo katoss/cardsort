@@ -205,6 +205,12 @@ def get_cluster_labels(
     cluster_cards : list of str
         List of card-labels for which you would like to get user-generated cluster-labels.
 
+    print_results : bool, optional
+        If true, prints which users grouped cards together and under which label
+
+    return_df_results: bool, optional
+       If true, returns a dataframe with results
+
     Returns
     -------
     out : None (default)
