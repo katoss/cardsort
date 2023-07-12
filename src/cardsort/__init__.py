@@ -4,7 +4,6 @@ from .analysis import (  # import functions into top module namespace
     create_dendrogram,
     get_distance_matrix,
     get_cluster_labels,
-    get_cluster_labels_df,
 )
 
 __version__ = version("cardsort")
