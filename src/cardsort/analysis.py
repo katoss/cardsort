@@ -182,7 +182,12 @@ def _get_cards_for_label(cluster_label: str, df_u: pd.DataFrame) -> List[str]:
     return cards_list
 
 
-def get_cluster_labels(df: pd.DataFrame, cluster_cards: List[str]) -> List[str]:
+def get_cluster_labels(
+    df: pd.DataFrame,
+    cluster_cards: List[str],
+    print_results: bool = True,
+    return_df_results: bool = False,
+) -> Union[pd.DataFrame, None]:
     """
     Return labels users created for clusters including a given list of cards.
 
@@ -202,10 +207,54 @@ def get_cluster_labels(df: pd.DataFrame, cluster_cards: List[str]) -> List[str]:
 
     Returns
     -------
-    out : list of str
-        Contains cluster-labels from all users who grouped the given cards together.
+    out : None (default)
+        If return_df_results = False
+    OR
+    out : pandas.DataFrame
+        Columns:
+            Name: user_id, int
+            Name: cluster_label, str
+            Name: cards, list of str
+        Dataframe with one row for each user who clustered the given cards together, including category label and
+        the full list of cards in that category.
     """
+    if return_df_results:
+        cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
 
+    user_ids = df["user_id"].unique()
+
+    for id in user_ids:
+        df_u = df.loc[df["user_id"] == id]
+        cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
+        if cluster_label is not None:
+            if print_results:
+                print("User " + str(id) + " labeled card(s): " + cluster_label)
+            if return_df_results:
+                cards = _get_cards_for_label(cluster_label, df_u)
+                cluster_df = pd.concat(
+                    [
+                        cluster_df,
+                        pd.DataFrame.from_records(
+                            [
+                                {
+                                    "user_id": id,
+                                    "cluster_label": cluster_label,
+                                    "cards": cards,
+                                }
+                            ]
+                        ),
+                    ],
+                    ignore_index=True,
+                )
+        else:
+            if print_results:
+                print("User " + str(id) + " did not cluster cards together.")
+
+    if return_df_results:
+        return cluster_df
+
+
+"""
     cluster_labels = []
     user_ids = df["user_id"].unique()
 
@@ -222,6 +271,7 @@ def get_cluster_labels(df: pd.DataFrame, cluster_cards: List[str]) -> List[str]:
             logging.info("No cards left in list.")
             break
     return cluster_labels
+"""
 
 
 def get_cluster_labels_df(df: pd.DataFrame, cluster_cards: List[str]) -> pd.DataFrame:
