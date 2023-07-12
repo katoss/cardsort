@@ -234,7 +234,11 @@ def get_cluster_labels(
             for card_label in cluster_cards
             if card_label not in missing_card_labels
         ]
-        print("Continue with cards: %s" % cluster_cards)
+        if len(cluster_cards) > 0:
+            print("Continue with cards: %s" % cluster_cards)
+        else:
+            print("No cards left in list.")
+            return None
 
     if return_df_results:
         cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
