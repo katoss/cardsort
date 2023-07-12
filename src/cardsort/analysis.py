@@ -166,21 +166,13 @@ def create_dendrogram(
 def _get_cluster_label_for_user(
     df_u: pd.DataFrame, cluster_cards: List[str]
 ) -> Union[str, None]:
-    cat_before = ""
-    for card in cluster_cards:
-        if card in df_u["card_label"].values:
-            cat = df_u.loc[df_u["card_label"] == card, "category_label"].values[0]
-            if cat_before != "":
-                if cat == cat_before:
-                    continue
-                else:
-                    return
-            cat_before = cat
-        else:
-            logging.info(f'"{card}" is not a valid card label. Removed from list.')
-            cluster_cards.remove(card)
-            logging.info("Continue with cards: %s" % cluster_cards)
-    return cat
+    list_cat = df_u.loc[
+        df_u["card_label"].isin(cluster_cards), "category_label"
+    ].unique()
+    if len(list_cat) == 1:
+        return list_cat.squeeze().tolist()
+    else:
+        return None
 
 
 def _get_cards_for_label(cluster_label: str, df_u: pd.DataFrame) -> List[str]:
