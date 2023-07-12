@@ -224,6 +224,18 @@ def get_cluster_labels(
         Dataframe with one row for each user who clustered the given cards together, including category label and
         the full list of cards in that category.
     """
+    if not set(cluster_cards) <= set(df["card_label"]):
+        missing_card_labels = set(cluster_cards) - set(df["card_label"])
+        print(
+            f'"{missing_card_labels}" is/are not a valid card label. Removed from list.'
+        )
+        cluster_cards = [
+            card_label
+            for card_label in cluster_cards
+            if card_label not in missing_card_labels
+        ]
+        print("Continue with cards: %s" % cluster_cards)
+
     if return_df_results:
         cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
 
