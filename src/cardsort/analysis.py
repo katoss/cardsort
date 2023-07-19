@@ -17,6 +17,40 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 
+def _check_data(df: pd.DataFrame) -> bool:
+    # check if user_ids go from 1 to n=number of users
+    user_ids = df["user_id"].unique()
+    for i, user_id in enumerate(user_ids):
+        if user_id != i + 1:
+            logger.error("User_ids are not in the right order or contain gaps.")
+            return False
+    # check if each card_id is always associated with exactly one card_label
+    card_id_counts = df.groupby("card_id")["card_label"].nunique()
+    for card_id, count in card_id_counts.items():
+        if count != 1:
+            logger.error(
+                f"Card_id {card_id} is associated with {count} different card_labels."
+            )
+            return False
+    # check if card_ids go from 1 to n=number of cards
+    card_ids = df["card_id"].unique()
+    for i, card_id in enumerate(card_ids):
+        if card_id != i + 1:
+            logger.error("Card_ids are not in the right order or contain gaps.")
+            return False
+    # check if all users categorize each card exactly once
+    categorized_cards_per_user = (
+        df.groupby("user_id")["card_id"].count().reset_index(name="card_count")
+    )
+    card_count_equal_categorized = (
+        categorized_cards_per_user["card_count"] == len(card_ids)
+    ).all()
+    if not card_count_equal_categorized:
+        logger.error("Not all users have categorized each card exactly once.")
+        return False
+    return True
+
+
 def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
     n = len(df_user)
 
@@ -54,9 +88,13 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
         A condensed distance matrix (a flat array containing the upper triangle of a distance matrix)
         representing the pairwise similarity of all cards.
     """
-    user_ids = df["user_id"].unique()
-
-    if user_ids[0] == 1:
+    if _check_data(df) == False:
+        logger.error(
+            "The DataFrame does not correspond to the required format. No distance matrix generated."
+        )
+        return None
+    else:
+        user_ids = df["user_id"].unique()
         for id in user_ids:
             df_u = df.loc[df["user_id"] == id]
             logger.info(f"Computing distance matrix for user {id}")
@@ -67,9 +105,6 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
                 distance_matrix_all = np.add(distance_matrix_all, distance_matrix_user)
         condensed_distance_matrix = squareform(distance_matrix_all)
         return condensed_distance_matrix
-    else:
-        logger.ERROR("The first user ID needs to equal 1")
-        return None
 
 
 def create_dendrogram(
@@ -121,46 +156,55 @@ def create_dendrogram(
         Can be a fraction (0 - 1) or an absolute value (<= n = number of users).
         The default cut is at 75%.
     """
-
-    if distance_matrix is None:
-        distance_matrix = get_distance_matrix(df)
-
-    count_types = ["absolute", "fraction"]
-    if count not in count_types:
-        raise ValueError("Invalid count type. Expected one of: %s" % count_types)
-
-    linkage_types = ["average", "complete", "single"]
-    if linkage not in linkage_types:
-        raise ValueError("Invalid linkage. Expected one of: %s" % linkage_types)
-
-    if count == "fraction":
-        distance_matrix = distance_matrix / np.max(distance_matrix)
-        color_threshold = 0.75 if color_threshold is None else color_threshold
+    if _check_data(df) == False:
+        logger.error(
+            "The DataFrame does not correspond to the required format. No dendrogram generated."
+        )
+        return None
     else:
-        color_threshold = (
-            np.max(distance_matrix) * 0.75
-            if color_threshold is None
-            else color_threshold
+        if distance_matrix is None:
+            distance_matrix = get_distance_matrix(df)
+
+        count_types = ["absolute", "fraction"]
+        if count not in count_types:
+            raise ValueError("Invalid count type. Expected one of: %s" % count_types)
+
+        linkage_types = ["average", "complete", "single"]
+        if linkage not in linkage_types:
+            raise ValueError("Invalid linkage. Expected one of: %s" % linkage_types)
+
+        if count == "fraction":
+            distance_matrix = distance_matrix / np.max(distance_matrix)
+            color_threshold = 0.75 if color_threshold is None else color_threshold
+        else:
+            color_threshold = (
+                np.max(distance_matrix) * 0.75
+                if color_threshold is None
+                else color_threshold
+            )
+
+        Z = hierarchy.linkage(distance_matrix, linkage)
+        plt.figure(layout="constrained")
+        labels = (
+            df.loc[df["user_id"] == 1]
+            .sort_values("card_id")["card_label"]
+            .squeeze()
+            .to_list()
+        )
+        dn = hierarchy.dendrogram(
+            Z, labels=labels, orientation="right", color_threshold=color_threshold
         )
 
-    Z = hierarchy.linkage(distance_matrix, linkage)
-    plt.figure(layout="constrained")
-    labels = (
-        df.loc[df["user_id"] == 1]
-        .sort_values("card_id")["card_label"]
-        .squeeze()
-        .to_list()
-    )
-    dn = hierarchy.dendrogram(
-        Z, labels=labels, orientation="right", color_threshold=color_threshold
-    )
+        x_max = np.max(distance_matrix)
+        plt.xticks(
+            np.arange(0.0, 1.1, 0.1) if x_max <= 1 else np.arange(0, x_max + 1, 1)
+        )
 
-    x_max = np.max(distance_matrix)
-    plt.xticks(np.arange(0.0, 1.1, 0.1) if x_max <= 1 else np.arange(0, x_max + 1, 1))
-
-    for leaf, leaf_color in zip(plt.gca().get_yticklabels(), dn["leaves_color_list"]):
-        leaf.set_color(leaf_color)
-    plt.show()
+        for leaf, leaf_color in zip(
+            plt.gca().get_yticklabels(), dn["leaves_color_list"]
+        ):
+            leaf.set_color(leaf_color)
+        plt.show()
 
 
 def _get_cluster_label_for_user(
@@ -224,53 +268,61 @@ def get_cluster_labels(
     out : None
         If return_df_results = False
     """
-    if not set(cluster_cards) <= set(df["card_label"]):
-        missing_card_labels = set(cluster_cards) - set(df["card_label"])
-        logger.info(
-            f'"{missing_card_labels}" is/are not a valid card label. Removed from list.'
+    if _check_data(df) == False:
+        logger.error(
+            "The data does not correspond to the required format. No cluster labels extracted."
         )
-        cluster_cards = [
-            card_label
-            for card_label in cluster_cards
-            if card_label not in missing_card_labels
-        ]
-        if len(cluster_cards) > 0:
-            logger.info("Continue with cards: %s" % cluster_cards)
-        else:
-            logger.info("No cards left in list.")
-            return None
+        return None
+    else:
+        if not set(cluster_cards) <= set(df["card_label"]):
+            missing_card_labels = set(cluster_cards) - set(df["card_label"])
+            logger.info(
+                f'"{missing_card_labels}" is/are not a valid card label. Removed from list.'
+            )
+            cluster_cards = [
+                card_label
+                for card_label in cluster_cards
+                if card_label not in missing_card_labels
+            ]
+            if len(cluster_cards) > 0:
+                logger.info("Continue with cards: %s" % cluster_cards)
+            else:
+                logger.info("No cards left in list.")
+                return None
 
-    if return_df_results:
-        cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
+        if return_df_results:
+            cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
 
-    user_ids = df["user_id"].unique()
+        user_ids = df["user_id"].unique()
 
-    for id in user_ids:
-        df_u = df.loc[df["user_id"] == id]
-        cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
-        if cluster_label is not None:
-            if print_results:
-                logger.info("User " + str(id) + " labeled card(s): " + cluster_label)
-            if return_df_results:
-                cards = _get_cards_for_label(cluster_label, df_u)
-                cluster_df = pd.concat(
-                    [
-                        cluster_df,
-                        pd.DataFrame.from_records(
-                            [
-                                {
-                                    "user_id": id,
-                                    "cluster_label": cluster_label,
-                                    "cards": cards,
-                                }
-                            ]
-                        ),
-                    ],
-                    ignore_index=True,
-                )
-        else:
-            if print_results:
-                logger.info("User " + str(id) + " did not cluster cards together.")
+        for id in user_ids:
+            df_u = df.loc[df["user_id"] == id]
+            cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
+            if cluster_label is not None:
+                if print_results:
+                    logger.info(
+                        "User " + str(id) + " labeled card(s): " + cluster_label
+                    )
+                if return_df_results:
+                    cards = _get_cards_for_label(cluster_label, df_u)
+                    cluster_df = pd.concat(
+                        [
+                            cluster_df,
+                            pd.DataFrame.from_records(
+                                [
+                                    {
+                                        "user_id": id,
+                                        "cluster_label": cluster_label,
+                                        "cards": cards,
+                                    }
+                                ]
+                            ),
+                        ],
+                        ignore_index=True,
+                    )
+            else:
+                if print_results:
+                    logger.info("User " + str(id) + " did not cluster cards together.")
 
-    if return_df_results:
-        return cluster_df
+        if return_df_results:
+            return cluster_df
