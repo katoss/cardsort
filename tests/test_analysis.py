@@ -19,7 +19,7 @@ def test_get_distance_matrix():
 def test_get_cluster_labels_print():
     input = ["Cat", "Tiger", "Dog"]
     expected = None
-    actual = analysis.get_cluster_labels(df, input)
+    actual = analysis.get_cluster_labels(df, input, return_df_results=False)
     assert actual == expected, "Test data cluster labels incorrectly retreived"
 
 
@@ -32,7 +32,10 @@ def test_get_cluster_labels_df():
     ]
     expected = pd.DataFrame(data_exp, columns=["user_id", "cluster_label", "cards"])
     expected = expected.astype({"user_id": "object"})
-    actual = analysis.get_cluster_labels(df, input, return_df_results=True)
+    actual = analysis.get_cluster_labels(
+        df=df,
+        cluster_cards=input,
+    )
     assert actual.equals(expected), "Dataframe does not equal expected dataframe"
 
 
