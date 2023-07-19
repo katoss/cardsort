@@ -3,6 +3,26 @@ import pandas as pd
 import pytest
 
 df = pd.read_csv("tests/test-data.csv")
+data_wrong_format = [
+    [1, "Dog", 1, "canines", 1],
+    [2, "Apple", 2, "food", 1],
+    [3, "Cat", 3, "felines", 1],
+    [3, "Cat", 4, "pets", 2],
+    [1, "Dog", 4, "pets", 2],
+    [2, "Apple", 5, "snacks", 2],
+    [2, "Apple", 6, "fruit", 3],
+    [3, "Cat", 7, "mammals", 3],
+    [1, "Dog", 7, "mammals", 3],
+    [1, "Dog", 7, "mammals", 3],  # duplicate row
+]
+columns = ["card_id", "card_label", "category_id", "category_label", "user_id"]
+df_wrong_format = pd.DataFrame(data_wrong_format, columns=columns)
+
+
+def test_check_data():
+    expected = False
+    actual = analysis._check_data(df_wrong_format)
+    assert actual == expected, "Wrong data input correctly recognized"
 
 
 def test_get_distance_matrix():
