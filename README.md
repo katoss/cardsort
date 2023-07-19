@@ -74,12 +74,17 @@ analysis.get_cluster_labels(df, cards)
 ```
 __Output__
 ```python
-['Healthy snacks', 'Snacks', 'Fruits', 'Food']
+  user_id   cluster_label                                              cards
+0       2  Healthy snacks                                    [Banana, Apple]
+1       3          Snacks     [Sandwich, Croissant, Banana, Mooncake, Apple]
+2       4          Fruits                                    [Apple, Banana]
+3       5            Food  [Banana, Croissant, Apple, Sandwich, Hot Dog, ...
 ```
+__Interpretation:__ In this case, the users with IDs 2 and 4 made clusters containing exactly the two cards of interest ('Banana' and 'Apple', as specified in the input variable 'cards'). User 2 labelled this cluster 'Healthy snacks', and user 4 'Fruits'. Users 3 and 5 also clustered these cards together, but they included additional other cards in the same cluster, and labelled the cluster 'Snacks' or 'Food'. User 1 does not appear in the output, because they did not cluster the cards together.
 
 ### Accepted data
-* This package works with data exports from [kardsort.com](https://kardsort.com/) (Export format 'Casolysis Data (.csv) - Recommended')
-* This data equals the following structure: ```card_id, card_label, category_id, category_label, user_id```
+* This package works with data exports from [kardsort.com](https://kardsort.com/) (Export format 'Casolysis Data (.csv) - Recommended') or other data following the same structure.
+* __Columns:__ ```card_id, card_label, category_id, category_label, user_id```
 
 ### Advanced usage
 See [documentation](https://cardsort.readthedocs.io)
