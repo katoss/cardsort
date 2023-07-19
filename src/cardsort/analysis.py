@@ -59,7 +59,7 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
     if user_ids[0] == 1:
         for id in user_ids:
             df_u = df.loc[df["user_id"] == id]
-            logging.info(f"Computing distance matrix for user {id}")
+            logger.info(f"Computing distance matrix for user {id}")
             distance_matrix_user = _get_distance_matrix_for_user(df_u)
             if id == 1:
                 distance_matrix_all = distance_matrix_user
@@ -68,7 +68,7 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
         condensed_distance_matrix = squareform(distance_matrix_all)
         return condensed_distance_matrix
     else:
-        logging.ERROR("The first user ID needs to equal 1")
+        logger.ERROR("The first user ID needs to equal 1")
         return None
 
 
@@ -186,7 +186,7 @@ def get_cluster_labels(
     df: pd.DataFrame,
     cluster_cards: List[str],
     print_results: bool = True,
-    return_df_results: bool = False,
+    return_df_results: bool = True,
 ) -> Union[pd.DataFrame, None]:
     """
     Return labels users created for clusters including a given list of cards.
@@ -213,20 +213,20 @@ def get_cluster_labels(
 
     Returns
     -------
-    out : None (default)
-        If return_df_results = False
-    OR
-    out : pandas.DataFrame
+    out : pandas.DataFrame (default)
         Columns:
             Name: user_id, int
             Name: cluster_label, str
             Name: cards, list of str
         Dataframe with one row for each user who clustered the given cards together, including category label and
         the full list of cards in that category.
+    OR
+    out : None
+        If return_df_results = False
     """
     if not set(cluster_cards) <= set(df["card_label"]):
         missing_card_labels = set(cluster_cards) - set(df["card_label"])
-        print(
+        logger.info(
             f'"{missing_card_labels}" is/are not a valid card label. Removed from list.'
         )
         cluster_cards = [
@@ -235,9 +235,9 @@ def get_cluster_labels(
             if card_label not in missing_card_labels
         ]
         if len(cluster_cards) > 0:
-            print("Continue with cards: %s" % cluster_cards)
+            logger.info("Continue with cards: %s" % cluster_cards)
         else:
-            print("No cards left in list.")
+            logger.info("No cards left in list.")
             return None
 
     if return_df_results:
@@ -250,7 +250,7 @@ def get_cluster_labels(
         cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
         if cluster_label is not None:
             if print_results:
-                print("User " + str(id) + " labeled card(s): " + cluster_label)
+                logger.info("User " + str(id) + " labeled card(s): " + cluster_label)
             if return_df_results:
                 cards = _get_cards_for_label(cluster_label, df_u)
                 cluster_df = pd.concat(
@@ -270,7 +270,7 @@ def get_cluster_labels(
                 )
         else:
             if print_results:
-                print("User " + str(id) + " did not cluster cards together.")
+                logger.info("User " + str(id) + " did not cluster cards together.")
 
     if return_df_results:
         return cluster_df
