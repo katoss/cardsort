@@ -52,18 +52,9 @@ def _check_data(df: pd.DataFrame) -> bool:
 
 
 def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
-    n = len(df_user)
-
-    X = np.zeros((n, n))
-    for i in range(n):
-        for j in range(i, n):
-            cat1 = df_user.loc[df_user["card_id"] == (i + 1), "category_label"].values[
-                0
-            ]
-            cat2 = df_user.loc[df_user["card_id"] == (j + 1), "category_label"].values[
-                0
-            ]
-            X[i, j] = X[j, i] = 0 if cat1 == cat2 else 1
+    df_user = df_user.sort_values("card_id")
+    arr = df_user["category_label"].values
+    X = (arr != arr[:, None]).astype(float)
     return X
 
 
