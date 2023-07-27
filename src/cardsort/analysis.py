@@ -281,11 +281,9 @@ def get_cluster_labels(
                 logger.info("No cards left in list.")
                 return None
 
-        if return_df_results:
-            cluster_df = pd.DataFrame(columns=["user_id", "cluster_label", "cards"])
-
         user_ids = df["user_id"].unique()
 
+        cluster_list = []
         for id_ in user_ids:
             df_u = df.loc[df["user_id"] == id_]
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
@@ -294,24 +292,13 @@ def get_cluster_labels(
                     logger.info(f"User {id_} labeled card(s): {cluster_label}")
                 if return_df_results:
                     cards = _get_cards_for_label(cluster_label, df_u)
-                    cluster_df = pd.concat(
-                        [
-                            cluster_df,
-                            pd.DataFrame.from_records(
-                                [
-                                    {
-                                        "user_id": id_,
-                                        "cluster_label": cluster_label,
-                                        "cards": cards,
-                                    }
-                                ]
-                            ),
-                        ],
-                        ignore_index=True,
+                    cluster_list.append(
+                        {"user_id": id_, "cluster_label": cluster_label, "cards": cards}
                     )
             else:
                 if print_results:
                     logger.info(f"User {id_} did not cluster cards together.")
 
         if return_df_results:
+            cluster_df = pd.DataFrame(cluster_list)
             return cluster_df
