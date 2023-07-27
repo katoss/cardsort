@@ -18,12 +18,10 @@ logger = logging.getLogger(__name__)
 
 
 def _check_data(df: pd.DataFrame) -> bool:
-    # check if user_ids go from 1 to n=number of users
-    user_ids = df["user_id"].unique()
-    for i, user_id in enumerate(user_ids):
-        if user_id != i + 1:
-            logger.error("User_ids are not in the right order or contain gaps.")
-            return False
+    # check if first user_id is 1
+    if df["user_id"].unique()[0] != 1:
+        logger.error("First user_id does not equal 1.")
+        return False
     # check if each card_id is always associated with exactly one card_label
     card_id_counts = df.groupby("card_id")["card_label"].nunique()
     for card_id, count in card_id_counts.items():
