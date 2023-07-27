@@ -32,13 +32,8 @@ def _check_data(df: pd.DataFrame) -> bool:
                 f"Card_id {card_id} is associated with {count} different card_labels."
             )
             return False
-    # check if card_ids go from 1 to n=number of cards
-    card_ids = df["card_id"].unique()
-    for i, card_id in enumerate(card_ids):
-        if card_id != i + 1:
-            logger.error("Card_ids are not in the right order or contain gaps.")
-            return False
     # check if all users categorize each card exactly once
+    card_ids = df["card_id"].unique()
     categorized_cards_per_user = (
         df.groupby("user_id")["card_id"].count().reset_index(name="card_count")
     )
