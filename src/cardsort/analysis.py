@@ -86,11 +86,11 @@ def get_distance_matrix(df: pd.DataFrame) -> np.ndarray:
         return None
     else:
         user_ids = df["user_id"].unique()
-        for id in user_ids:
-            df_u = df.loc[df["user_id"] == id]
-            logger.info(f"Computing distance matrix for user {id}")
+        for id_ in user_ids:
+            df_u = df.loc[df["user_id"] == id_]
+            logger.info(f"Computing distance matrix for user {id_}")
             distance_matrix_user = _get_distance_matrix_for_user(df_u)
-            if id == 1:
+            if id_ == 1:
                 distance_matrix_all = distance_matrix_user
             else:
                 distance_matrix_all = np.add(distance_matrix_all, distance_matrix_user)
@@ -286,13 +286,13 @@ def get_cluster_labels(
 
         user_ids = df["user_id"].unique()
 
-        for id in user_ids:
-            df_u = df.loc[df["user_id"] == id]
+        for id_ in user_ids:
+            df_u = df.loc[df["user_id"] == id_]
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
                 if print_results:
                     logger.info(
-                        "User " + str(id) + " labeled card(s): " + cluster_label
+                        "User " + str(id_) + " labeled card(s): " + cluster_label
                     )
                 if return_df_results:
                     cards = _get_cards_for_label(cluster_label, df_u)
@@ -302,7 +302,7 @@ def get_cluster_labels(
                             pd.DataFrame.from_records(
                                 [
                                     {
-                                        "user_id": id,
+                                        "user_id": id_,
                                         "cluster_label": cluster_label,
                                         "cards": cards,
                                     }
@@ -313,7 +313,7 @@ def get_cluster_labels(
                     )
             else:
                 if print_results:
-                    logger.info("User " + str(id) + " did not cluster cards together.")
+                    logger.info("User " + str(id_) + " did not cluster cards together.")
 
         if return_df_results:
             return cluster_df
