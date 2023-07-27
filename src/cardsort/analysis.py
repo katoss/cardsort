@@ -33,15 +33,15 @@ def _check_data(df: pd.DataFrame) -> bool:
             )
             return False
     # check if all users categorize each card exactly once
-    card_ids = df["card_id"].unique()
-    categorized_cards_per_user = (
-        df.groupby("user_id")["card_id"].count().reset_index(name="card_count")
-    )
-    card_count_equal_categorized = (
-        categorized_cards_per_user["card_count"] == len(card_ids)
-    ).all()
-    if not card_count_equal_categorized:
-        logger.error("Not all users have categorized each card exactly once.")
+    counts = df.groupby(["user_id", "card_id"]).size()
+    if (counts > 1).any():
+        logger.error("At least one user categorized at least one card more than once.")
+        return False
+    n_cards = df["card_id"].nunique()
+    n_users = df["user_id"].nunique()
+    expected_size = n_cards * n_users
+    if len(counts) != expected_size:
+        logger.error("At least one user does not categorized at least one card.")
         return False
     return True
 
