@@ -291,9 +291,7 @@ def get_cluster_labels(
             cluster_label = _get_cluster_label_for_user(df_u, cluster_cards)
             if cluster_label is not None:
                 if print_results:
-                    logger.info(
-                        "User " + str(id_) + " labeled card(s): " + cluster_label
-                    )
+                    logger.info(f"User {id_} labeled card(s): {cluster_label}")
                 if return_df_results:
                     cards = _get_cards_for_label(cluster_label, df_u)
                     cluster_df = pd.concat(
@@ -313,7 +311,7 @@ def get_cluster_labels(
                     )
             else:
                 if print_results:
-                    logger.info("User " + str(id_) + " did not cluster cards together.")
+                    logger.info(f"User {id_} did not cluster cards together.")
 
         if return_df_results:
             return cluster_df
