@@ -51,7 +51,6 @@ def test_get_cluster_labels_df():
         [5, "Animals", ["Dog", "Tiger", "Cat"]],
     ]
     expected = pd.DataFrame(data_exp, columns=["user_id", "cluster_label", "cards"])
-    expected = expected.astype({"user_id": "object"})
     actual = analysis.get_cluster_labels(
         df=df,
         cluster_cards=input,
