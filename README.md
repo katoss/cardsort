@@ -90,14 +90,15 @@ __Interpretation:__ In this case, the users with IDs 2 and 4 made clusters conta
 ### Advanced usage
 See [documentation](https://cardsort.readthedocs.io)
 
-## Contributing
-
-Interested in contributing? Check out the [contributing guidelines](https://cardsort.readthedocs.io/en/latest/contributing.html). Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
-
-## License
+## Project information
+### License
 
 `cardsort` is licensed under the of the [MIT license](https://github.com/katoss/cardsort/blob/documentation/LICENSE).
 
-## Credits
+### Contributing
+
+Interested in contributing? Check out the [contributing guidelines](https://cardsort.readthedocs.io/en/latest/contributing.html). Please note that this project is released with a [Code of Conduct](https://github.com/katoss/cardsort/blob/main/CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
+### Credits
 
 `cardsort` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
