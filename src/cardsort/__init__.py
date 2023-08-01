@@ -1,12 +1,10 @@
-# read version from installed package
-from importlib.metadata import version
-
-__version__ = version("cardsort")
-
-# import functions into top module namespace
-from .analysis import (
+import logging
+from importlib.metadata import version  # read version from installed package
+from .analysis import (  # import functions into top module namespace
     create_dendrogram,
     get_distance_matrix,
     get_cluster_labels,
-    get_cluster_labels_df,
 )
+
+__version__ = version("cardsort")
+logging.getLogger(__name__).addHandler(logging.NullHandler())
