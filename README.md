@@ -1,7 +1,3 @@
-<br>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <div align="center">
 <img src="https://raw.githubusercontent.com/katoss/cardsort/main/logo.png" width="400">
 </div>
@@ -16,7 +12,10 @@
 ![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
 ![Codecov](https://img.shields.io/codecov/c/github/katoss/cardsort)
 [![DOI](https://zenodo.org/badge/614836750.svg)](https://zenodo.org/badge/latestdoi/614836750)
-[![All Contributors](https://img.shields.io/github/all-contributors/katoss/cardsort?color=ee8449&style=flat-square)](#contributors)
+<br>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 
 Cardsort helps UX researchers quickly analyse data from open card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
