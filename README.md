@@ -12,6 +12,8 @@
 ![Read the Docs](https://img.shields.io/readthedocs/cardsort)
 ![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
 ![Codecov](https://img.shields.io/codecov/c/github/katoss/cardsort)
+[![DOI](https://zenodo.org/badge/614836750.svg)](https://zenodo.org/badge/latestdoi/614836750)
+[![All Contributors](https://img.shields.io/github/all-contributors/katoss/cardsort?color=ee8449&style=flat-square)](#contributors)
 
 
 Cardsort helps UX researchers quickly analyse data from open card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
@@ -89,14 +91,34 @@ __Interpretation:__ In this case, the users with IDs 2 and 4 made clusters conta
 ### Advanced usage
 See [documentation](https://cardsort.readthedocs.io)
 
-## Contributing
-
-Interested in contributing? Check out the [contributing guidelines](https://cardsort.readthedocs.io/en/latest/contributing.html). Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
-
-## License
+## Project information
+### License
 
 `cardsort` is licensed under the of the [MIT license](https://github.com/katoss/cardsort/blob/documentation/LICENSE).
 
-## Credits
+### Contributing
+
+Interested in contributing? Check out the [contributing guidelines](https://cardsort.readthedocs.io/en/latest/contributing.html). Please note that this project is released with a [Code of Conduct](https://github.com/katoss/cardsort/blob/main/CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
+### Citation
+
+If you want to cite cardsort, please use the following DOI: [![DOI](https://zenodo.org/badge/614836750.svg)](https://zenodo.org/badge/latestdoi/614836750)
+
+### Credits
 
 `cardsort` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
