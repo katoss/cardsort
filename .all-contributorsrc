@@ -20,6 +20,18 @@
         "projectManagement",
         "research"
       ]
+    },
+    {
+      "login": "gedankenstuecke",
+      "name": "Bastian Greshake Tzovaras",
+      "avatar_url": "https://avatars.githubusercontent.com/u/674899?v=4",
+      "profile": "https://tzovar.as",
+      "contributions": [
+        "fundingFinding",
+        "code",
+        "ideas",
+        "mentoring"
+      ]
     }
   ],
   "contributorsPerLine": 7,
