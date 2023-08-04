@@ -21,7 +21,7 @@
         "research"
       ]
     },
-    {
+    {      
       "login": "gedankenstuecke",
       "name": "Bastian Greshake Tzovaras",
       "avatar_url": "https://avatars.githubusercontent.com/u/674899?v=4",
@@ -38,6 +38,16 @@
       "name": "Semidán Robaina",
       "avatar_url": "https://avatars.githubusercontent.com/u/21340147?v=4",
       "profile": "https://www.linkedin.com/in/semidan-robaina/",
+      "contributions": [
+        "review",
+        "ideas"
+      ]
+    },
+    {
+      "login": "Batalex",
+      "name": "Alex Batisse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11004857?v=4",
+      "profile": "http://batalex.github.io",
       "contributions": [
         "review",
         "ideas"
