@@ -34,6 +34,16 @@
       ]
     },
     {
+      "login": "Batalex",
+      "name": "Alex Batisse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11004857?v=4",
+      "profile": "http://batalex.github.io",
+      "contributions": [
+        "review",
+        "ideas"
+      ]
+    },
+    {
       "login": "Robaina",
       "name": "Semidán Robaina",
       "avatar_url": "https://avatars.githubusercontent.com/u/21340147?v=4",
@@ -44,10 +54,10 @@
       ]
     },
     {
-      "login": "Batalex",
-      "name": "Alex Batisse",
-      "avatar_url": "https://avatars.githubusercontent.com/u/11004857?v=4",
-      "profile": "http://batalex.github.io",
+      "login": "Khynder",
+      "name": "Khynder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/133049827?v=4",
+      "profile": "https://github.com/khynder",
       "contributions": [
         "review",
         "ideas"
