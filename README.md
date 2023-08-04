@@ -1,4 +1,7 @@
 <br>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <div align="center">
 <img src="https://raw.githubusercontent.com/katoss/cardsort/main/logo.png" width="400">
 </div>
@@ -111,6 +114,21 @@ If you want to cite cardsort, please use the following DOI: [![DOI](https://zeno
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/katoss"><img src="https://avatars.githubusercontent.com/u/23122159?v=4?s=100" width="100px;" alt="Katharina Kloppenborg"/><br /><sub><b>Katharina Kloppenborg</b></sub></a><br /><a href="https://github.com/katoss/cardsort/commits?author=katoss" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
