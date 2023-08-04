@@ -32,6 +32,16 @@
         "ideas",
         "mentoring"
       ]
+    },
+    {
+      "login": "Robaina",
+      "name": "Semidán Robaina",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21340147?v=4",
+      "profile": "https://www.linkedin.com/in/semidan-robaina/",
+      "contributions": [
+        "review",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
