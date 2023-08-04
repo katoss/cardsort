@@ -14,7 +14,7 @@
 [![DOI](https://zenodo.org/badge/614836750.svg)](https://zenodo.org/badge/latestdoi/614836750)
 <br>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 
@@ -119,7 +119,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/katoss"><img src="https://avatars.githubusercontent.com/u/23122159?v=4?s=100" width="100px;" alt="Katharina Kloppenborg"/><br /><sub><b>Katharina Kloppenborg</b></sub></a><br /><a href="https://github.com/katoss/cardsort/commits?author=katoss" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/katoss"><img src="https://avatars.githubusercontent.com/u/23122159?v=4?s=100" width="100px;" alt="Katharina Kloppenborg"/><br /><sub><b>Katharina Kloppenborg</b></sub></a><br /><a href="https://github.com/katoss/cardsort/commits?author=katoss" title="Code">💻</a> <a href="#ideas-katoss" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/katoss/cardsort/commits?author=katoss" title="Documentation">📖</a> <a href="#design-katoss" title="Design">🎨</a> <a href="#projectManagement-katoss" title="Project Management">📆</a> <a href="#research-katoss" title="Research">🔬</a></td>
     </tr>
   </tbody>
 </table>
