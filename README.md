@@ -6,7 +6,7 @@
 
 ## A Python package to cluster and visualize data from open card sorting tasks
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![PyPI](https://img.shields.io/pypi/v/cardsort)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/katoss/cardsort/CI.yml)
 ![Read the Docs](https://img.shields.io/readthedocs/cardsort)
