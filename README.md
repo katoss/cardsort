@@ -1,4 +1,3 @@
-<br>
 <div align="center">
 <img src="https://raw.githubusercontent.com/katoss/cardsort/main/logo.png" width="400">
 </div>
@@ -13,8 +12,10 @@
 ![Python](https://img.shields.io/badge/Python-3.8--3.12-green)
 ![Codecov](https://img.shields.io/codecov/c/github/katoss/cardsort)
 [![DOI](https://zenodo.org/badge/614836750.svg)](https://zenodo.org/badge/latestdoi/614836750)
-[![All Contributors](https://img.shields.io/github/all-contributors/katoss/cardsort?color=ee8449&style=flat-square)](#contributors)
 [![pyOpenSci](https://tinyurl.com/y22nb8up)](https://github.com/pyOpenSci/software-review/issues/102)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 
 Cardsort helps UX researchers quickly analyse data from open card sorting exercises using hierarchical cluster analysis. This task helps to understand how people organize information, and is frequently used to develop information architectures for websites. Click [here](https://www.nngroup.com/articles/card-sorting-definition/) to learn more about the card sorting method.
@@ -112,6 +113,25 @@ If you want to cite cardsort, please use the following DOI: [![DOI](https://zeno
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/katoss"><img src="https://avatars.githubusercontent.com/u/23122159?v=4?s=100" width="100px;" alt="Katharina Kloppenborg"/><br /><sub><b>Katharina Kloppenborg</b></sub></a><br /><a href="https://github.com/katoss/cardsort/commits?author=katoss" title="Code">💻</a> <a href="#ideas-katoss" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/katoss/cardsort/commits?author=katoss" title="Documentation">📖</a> <a href="#design-katoss" title="Design">🎨</a> <a href="#projectManagement-katoss" title="Project Management">📆</a> <a href="#research-katoss" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://tzovar.as"><img src="https://avatars.githubusercontent.com/u/674899?v=4?s=100" width="100px;" alt="Bastian Greshake Tzovaras"/><br /><sub><b>Bastian Greshake Tzovaras</b></sub></a><br /><a href="#fundingFinding-gedankenstuecke" title="Funding Finding">🔍</a> <a href="https://github.com/katoss/cardsort/commits?author=gedankenstuecke" title="Code">💻</a> <a href="#ideas-gedankenstuecke" title="Ideas, Planning, & Feedback">🤔</a> <a href="#mentoring-gedankenstuecke" title="Mentoring">🧑‍🏫</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://batalex.github.io"><img src="https://avatars.githubusercontent.com/u/11004857?v=4?s=100" width="100px;" alt="Alex Batisse"/><br /><sub><b>Alex Batisse</b></sub></a><br /><a href="https://github.com/katoss/cardsort/pulls?q=is%3Apr+reviewed-by%3ABatalex" title="Reviewed Pull Requests">👀</a> <a href="#ideas-Batalex" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/semidan-robaina/"><img src="https://avatars.githubusercontent.com/u/21340147?v=4?s=100" width="100px;" alt="Semidán Robaina"/><br /><sub><b>Semidán Robaina</b></sub></a><br /><a href="https://github.com/katoss/cardsort/pulls?q=is%3Apr+reviewed-by%3ARobaina" title="Reviewed Pull Requests">👀</a> <a href="#ideas-Robaina" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/khynder"><img src="https://avatars.githubusercontent.com/u/133049827?v=4?s=100" width="100px;" alt="khynder"/><br /><sub><b>khynder</b></sub></a><br /><a href="https://github.com/katoss/cardsort/pulls?q=is%3Apr+reviewed-by%3Akhynder" title="Reviewed Pull Requests">👀</a> <a href="#ideas-khynder" title="Ideas, Planning, & Feedback">🤔</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

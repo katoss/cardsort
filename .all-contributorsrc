@@ -1,0 +1,73 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "katoss",
+      "name": "Katharina Kloppenborg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23122159?v=4",
+      "profile": "https://github.com/katoss",
+      "contributions": [
+        "code",
+        "ideas",
+        "doc",
+        "design",
+        "projectManagement",
+        "research"
+      ]
+    },
+    {      
+      "login": "gedankenstuecke",
+      "name": "Bastian Greshake Tzovaras",
+      "avatar_url": "https://avatars.githubusercontent.com/u/674899?v=4",
+      "profile": "https://tzovar.as",
+      "contributions": [
+        "fundingFinding",
+        "code",
+        "ideas",
+        "mentoring"
+      ]
+    },
+    {
+      "login": "Batalex",
+      "name": "Alex Batisse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11004857?v=4",
+      "profile": "http://batalex.github.io",
+      "contributions": [
+        "review",
+        "ideas"
+      ]
+    },
+    {
+      "login": "Robaina",
+      "name": "Semidán Robaina",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21340147?v=4",
+      "profile": "https://www.linkedin.com/in/semidan-robaina/",
+      "contributions": [
+        "review",
+        "ideas"
+      ]
+    },
+    {
+      "login": "khynder",
+      "name": "khynder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/133049827?v=4",
+      "profile": "https://github.com/khynder",
+      "contributions": [
+        "review",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "cardsort",
+  "projectOwner": "katoss"
+}
