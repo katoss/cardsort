@@ -69,7 +69,7 @@ def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    df : pandas.DataFrame (subset for a single user_id)
         Columns:
             Name: card_id, dtype: int64
             Name: card_label, dtype: object
@@ -233,6 +233,31 @@ def create_dendrogram(
 def _get_cluster_label_for_user(
     df_u: pd.DataFrame, cluster_cards: List[str]
 ) -> Union[str, None]:
+    """
+    Return labels an individual user created for clusters including a given list of cards.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame (subset for a single user_id)
+        Columns:
+                Name: card_id, dtype: int64
+                Name: card_label, dtype: object
+                Name: category_id, dtype: int64
+                Name: category_label, dtype: object
+                Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    cluster_cards : list of str
+        List of card-labels for which you would like to get user-generated cluster-labels.
+
+    Returns
+    -------
+    out : str
+        Category_label for the list of card_labels provided (if all cards have the same label).
+    OR
+    out : None
+        If the cards in the list provided do not have the same card_label.
+    """
     list_cat = df_u.loc[
         df_u["card_label"].isin(cluster_cards), "category_label"
     ].unique()
