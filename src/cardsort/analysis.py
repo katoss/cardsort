@@ -18,6 +18,25 @@ logger = logging.getLogger(__name__)
 
 
 def _check_data(df: pd.DataFrame) -> bool:
+    """
+    Checks if input data is in the correct format.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Columns:
+            Name: card_id, dtype: int64
+            Name: card_label, dtype: object
+            Name: category_id, dtype: int64
+            Name: category_label, dtype: object
+            Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    Returns
+    -------
+    out : bool
+        True if the input data is in the correct format, False otherwise.
+    """
     # check if first user_id is 1
     if df["user_id"].unique()[0] != 1:
         logger.error("First user_id does not equal 1.")
