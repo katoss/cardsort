@@ -268,6 +268,27 @@ def _get_cluster_label_for_user(
 
 
 def _get_cards_for_label(cluster_label: str, df_u: pd.DataFrame) -> List[str]:
+    """
+    Return list of all cards with a given cluster label for an individual user.
+
+    Parameters
+    ----------
+    cluster_label : str
+        A category label
+    df_u : pandas.DataFrame (subset for an individual user_id)
+        Columns:
+                Name: card_id, dtype: int64
+                Name: card_label, dtype: object
+                Name: category_id, dtype: int64
+                Name: category_label, dtype: object
+                Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    Returns
+    -------
+    out : List of str
+        List including all card_labels that have the given category_label
+    """
     cards_list = df_u.loc[
         df_u["category_label"] == cluster_label, "card_label"
     ].tolist()
