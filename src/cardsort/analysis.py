@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 def _check_data(df: pd.DataFrame) -> bool:
     """
-    Checks if input data is in the correct format.
+    Check if input data is in the correct format.
 
     Parameters
     ----------
@@ -64,6 +64,26 @@ def _check_data(df: pd.DataFrame) -> bool:
 
 
 def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
+    """
+    Return distance matrix for an individual user.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Columns:
+            Name: card_id, dtype: int64
+            Name: card_label, dtype: object
+            Name: category_id, dtype: int64
+            Name: category_label, dtype: object
+            Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    Returns
+    -------
+    out : np.ndarray
+        A distance matrix representing the pairwise similarity of all cards for an individual user (1 if
+        they put two cards together, 0 otherwise).
+    """
     df_user = df_user.sort_values("card_id")
     arr = df_user["category_label"].values
     X = (arr != arr[:, None]).astype(float)
