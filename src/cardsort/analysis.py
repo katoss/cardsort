@@ -18,6 +18,25 @@ logger = logging.getLogger(__name__)
 
 
 def _check_data(df: pd.DataFrame) -> bool:
+    """
+    Check if input data is in the correct format.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Columns:
+            Name: card_id, dtype: int64
+            Name: card_label, dtype: object
+            Name: category_id, dtype: int64
+            Name: category_label, dtype: object
+            Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    Returns
+    -------
+    out : bool
+        True if the input data is in the correct format, False otherwise.
+    """
     # check if first user_id is 1
     if df["user_id"].unique()[0] != 1:
         logger.error("First user_id does not equal 1.")
@@ -45,6 +64,26 @@ def _check_data(df: pd.DataFrame) -> bool:
 
 
 def _get_distance_matrix_for_user(df_user: pd.DataFrame) -> np.ndarray:
+    """
+    Return distance matrix for an individual user.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame (subset for a single user_id)
+        Columns:
+            Name: card_id, dtype: int64
+            Name: card_label, dtype: object
+            Name: category_id, dtype: int64
+            Name: category_label, dtype: object
+            Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    Returns
+    -------
+    out : np.ndarray
+        A distance matrix representing the pairwise similarity of all cards for an individual user (1 if
+        they put two cards together, 0 otherwise).
+    """
     df_user = df_user.sort_values("card_id")
     arr = df_user["category_label"].values
     X = (arr != arr[:, None]).astype(float)
@@ -194,6 +233,31 @@ def create_dendrogram(
 def _get_cluster_label_for_user(
     df_u: pd.DataFrame, cluster_cards: List[str]
 ) -> Union[str, None]:
+    """
+    Return labels an individual user created for clusters including a given list of cards.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame (subset for a single user_id)
+        Columns:
+                Name: card_id, dtype: int64
+                Name: card_label, dtype: object
+                Name: category_id, dtype: int64
+                Name: category_label, dtype: object
+                Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    cluster_cards : list of str
+        List of card-labels for which you would like to get user-generated cluster-labels.
+
+    Returns
+    -------
+    out : str
+        Category_label for the list of card_labels provided (if all cards have the same label).
+    OR
+    out : None
+        If the cards in the list provided do not have the same card_label.
+    """
     list_cat = df_u.loc[
         df_u["card_label"].isin(cluster_cards), "category_label"
     ].unique()
@@ -204,6 +268,27 @@ def _get_cluster_label_for_user(
 
 
 def _get_cards_for_label(cluster_label: str, df_u: pd.DataFrame) -> List[str]:
+    """
+    Return list of all cards with a given cluster label for an individual user.
+
+    Parameters
+    ----------
+    cluster_label : str
+        A category label
+    df_u : pandas.DataFrame (subset for an individual user_id)
+        Columns:
+                Name: card_id, dtype: int64
+                Name: card_label, dtype: object
+                Name: category_id, dtype: int64
+                Name: category_label, dtype: object
+                Name: user_id, dtype: int64
+        These columns correspond to the 'Casolysis Data (.csv) - Recommended' export from kardsort.com.
+
+    Returns
+    -------
+    out : List of str
+        List including all card_labels that have the given category_label
+    """
     cards_list = df_u.loc[
         df_u["category_label"] == cluster_label, "card_label"
     ].tolist()
